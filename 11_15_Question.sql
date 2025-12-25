@@ -4,7 +4,8 @@ SELECT
     COUNT(*) AS total_titles,
     RANK() OVER (ORDER BY COUNT(*) DESC) AS year_rank
 FROM netfilex
-GROUP BY release_year;
+GROUP BY release_year
+LIMIT 10;
 
 -- 12. Find the top 3 most common ratings per country
 WITH rating_rank AS (
@@ -25,7 +26,8 @@ SELECT
     rating,
     rating_count
 FROM rating_rank
-WHERE rn <= 3;
+WHERE rn <= 3
+LIMIT 10;
  
 -- 13. Which countries specialize more in TV Shows than Movies?
 SELECT
@@ -35,7 +37,8 @@ GROUP BY country
 HAVING
     COUNT(*) FILTER (WHERE type = 'TV Show')
     >
-    COUNT(*) FILTER (WHERE type = 'Movie');
+    COUNT(*) FILTER (WHERE type = 'Movie')
+    LIMIT 10;
 
 -- 14. Find content added most recently to Netflix
 SELECT
@@ -53,4 +56,5 @@ SELECT
 FROM netfilex
 WHERE type = 'TV Show'
   AND CAST(SPLIT_PART(duration, ' ', 1) AS INT) > 5
-ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC;
+ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
+LIMIT 10;
