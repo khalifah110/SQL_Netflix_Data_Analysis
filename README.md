@@ -110,10 +110,19 @@ LIMIT 10;
 ```
 <img width="1200" height="800" alt="Code_Generated_Image (2)" src="https://github.com/user-attachments/assets/061dd713-70d4-4083-a78e-945ad32b7dfa" />
 
+**-** Directors like Rajiv Chilaka and Raúl Campos & Jan Suter appear frequently, indicating repeat collaborations with Netflix.
 
+ **-** A mix of international and Hollywood directors shows Netflix’s openness to diverse creative voices.
+
+ **-** Well-known names such as Martin Scorsese and Steven Spielberg appearing in the top list reinforce Netflix’s credibility as a platform for high-profile filmmakers.
+
+ **-** The results suggest Netflix values consistent content production from trusted directors.
 
 
 ### 4️⃣ Percentage of Movies vs TV Shows
+
+This question compares the overall content mix on Netflix by calculating the percentage of Movies versus TV Shows. It helps understand Netflix’s strategic focus between standalone films and episodic content.
+
 ``` SQL
 SELECT
     type,
@@ -122,7 +131,24 @@ FROM netfilex
 GROUP BY type;
 ```
 
+| TYPE     | PERCENTAGE   |
+|----------|--------------|
+|Movie     | 69.62        |
+|TV Show   | 30.38        |
+
+
+**-** Movies make up nearly 70% of Netflix’s catalog, indicating a stronger emphasis on film content.
+
+**-** TV Shows account for just over 30%, yet they often drive longer user engagement through binge-watching.
+
+**-** The imbalance suggests Netflix prioritizes content volume through movies, while still leveraging TV Shows for subscriber retention and engagement.
+
+**-** This mix supports Netflix’s dual strategy of broad content availability and long-form storytelling.
+
 ### 5️⃣ Year With the Highest Content Releases
+
+This query identifies the year with the highest volume of content releases, offering insight into Netflix’s peak production or acquisition period.
+
 ```SQL
 SELECT
     release_year,
@@ -132,7 +158,24 @@ GROUP BY release_year
 ORDER BY total_releases DESC
 LIMIT 1;
 ```
+
+|RELEASE YEAR|TOTAL RELEASE|
+|------------|-------------|
+| 2018       | 1147        |
+
+
+**-** 2018 recorded the highest number of releases, with over 1,100 titles added.
+
+**-** This peak aligns with Netflix’s aggressive expansion phase, where it heavily invested in original content to outpace competitors.
+
+**-** The spike suggests a strategic push to rapidly grow the content library and attract new subscribers globally.
+
+**-** Understanding this trend helps contextualize Netflix’s content growth strategy over time.
+
 ### 6️⃣ Most Common Genre by Content Type
+
+What is the most common genre for Movies and TV Shows on Netflix?
+
 ``` SQL
 WITH genre_count AS (
     SELECT
@@ -152,7 +195,17 @@ FROM genre_count
 WHERE ranking = 1;
 ```
 
+
+**-** Movies: The dominance of Dramas, International Movies shows Netflix’s strong focus on emotionally driven and globally diverse storytelling.
+
+**-** TV Shows: Kids’ TV being the most common genre highlights Netflix’s strategic investment in family-friendly and children’s programming.
+
+**-** Business Insight: Netflix balances global drama content with long-term engagement genres like kids’ shows that encourage repeat viewing and subscriptions.
+
 ### 7️⃣ Countries Adding the Most Content in the Last 5 Years
+
+Which countries have contributed the most new content to Netflix in the past five years?
+
 ``` SQL
 SELECT
     country,
@@ -165,8 +218,16 @@ ORDER BY recent_additions DESC
 LIMIT 5;
 ```
 
+**-** The United States continues to dominate Netflix’s content pipeline.
+
+**-** India and South Korea reflect Netflix’s expansion into high-growth international markets.
+
+**-** Business Insight: Netflix is actively diversifying content production globally to reach broader audiences and localize its offerings.
 
 ### 8️⃣ Average Movie Duration by Rating
+
+What is the average duration of movies based on their content rating?
+
 ``` SQL
 SELECT
     rating,
@@ -178,7 +239,16 @@ GROUP BY rating
 ORDER BY avg_minutes DESC;
 ```
 
+**-** Higher-rated content (NC-17, TV-14) tends to be significantly longer, often due to complex narratives.
+
+**-** Children’s content has shorter runtimes to match attention spans.
+
+**-** Business Insight: Runtime varies strategically by target audience, influencing content pacing and production decisions.
+
 ### 9️⃣ Longest Movie on Netflix
+
+Which movie has the longest runtime on Netflix?
+
 ``` SQL
 SELECT
     title,
@@ -189,10 +259,16 @@ ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
 LIMIT 1;
 
 ```
+**-** The result reveals data quality issues, where duration information is missing.
 
+**-** Business Insight: Incomplete metadata can affect analytics accuracy and user experience (e.g., filtering by length).
 
+**-** Highlights the importance of data validation and cleaning in real-world analytics projects.
 
 ### 🔟 Directors With Both Movies & TV Shows
+
+Which directors have created both Movies and TV Shows on Netflix?
+
 ``` SQL
 SELECT
     directer
@@ -202,9 +278,14 @@ GROUP BY directer
 HAVING COUNT(DISTINCT type) = 2
 LIMIT 1O;
 ```
+**-** These directors demonstrate cross-format versatility, contributing to both long-form series and standalone films.
 
+**-** Business Insight: Directors capable of working across formats offer Netflix flexibility in content strategy and production planning.
 
 ### 1️⃣1️⃣ Ranking Release Years by Content Volume
+
+Which years saw the highest number of content releases on Netflix?
+
 ``` SQL
 SELECT
     release_year,
@@ -214,10 +295,19 @@ FROM netfilex
 GROUP BY release_year
 LIMIT 10;
 ```
+**-** 2018 stands out as Netflix’s most aggressive expansion year.
 
+**-** A steady increase from 2015–2019 reflects Netflix’s rapid global growth phase.
+
+**-** The drop after 2020 may reflect content production disruptions and shifts in strategy.
+
+**-** Business Insight: Understanding peak release years helps evaluate content investment cycles and platform growth phases.
 
 
 ### 1️⃣2️⃣ Top 3 Ratings Per Country
+
+What are the most common content ratings across different countries?
+
 ``` SQL
 WITH rating_rank AS (
     SELECT
@@ -241,9 +331,16 @@ WHERE rn <= 3
 LIMIT 10;
 ```
 
+**-** TV-MA and TV-14 dominate globally, suggesting Netflix prioritizes mature and teen audiences.
+
+**-** Rating distribution varies by region, reflecting cultural and regulatory differences.
+
+**-** Business Insight: Rating trends guide content localization and compliance strategies across countries.
 
 
 ### 1️⃣3️⃣ Countries With More TV Shows Than Movies
+
+Which countries produce more TV Shows than Movies on Netflix?
 ``` SQL
 SELECT
     country
@@ -257,8 +354,17 @@ LIMIT 10;
 
 ```
 
+**-** These regions show a strong preference for episodic content.
+
+**-** TV Shows encourage longer user engagement and repeat viewing.
+
+**-** Business Insight: Netflix may focus series-based investments in these regions to maximize retention.
+
 
 ### 1️⃣4️⃣ Most Recently Added Content
+
+What content was added most recently to Netflix?
+
 ``` SQL
 SELECT
     title,
@@ -269,7 +375,17 @@ ORDER BY date_added DESC
 LIMIT 10;
 ```
 
+**-** Several recent entries lack date metadata, revealing data completeness issues.
+
+**-** Business Insight: Accurate “date added” fields are critical for content freshness analysis, recommendations, and marketing campaigns.
+
+**-** This highlights the real-world challenge of working with imperfect datasets.
+
+
 ### 1️⃣5️⃣ Binge-Worthy TV Shows (More Than 5 Seasons)
+
+Which TV Shows on Netflix are considered binge-worthy based on season count?
+
 ``` SQL
 SELECT
     title,
@@ -280,8 +396,13 @@ WHERE type = 'TV Show'
 ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
 LIMIT 10;
 ```
+**-** Long-running shows dominate binge-watching behavior.
 
-#📈 Key Takeaways
+**-** These titles are high-retention assets, often driving long-term subscriptions.
+
+**-** Business Insight: Investing in multi-season content increases user lifetime value and platform loyalty.
+
+# 📈 Key Takeaways
 
 Netflix content is heavily concentrated in a few key countries
 
@@ -291,6 +412,6 @@ Recent years reflect aggressive content expansion
 
 Advanced SQL techniques enable deeper, more meaningful insights
 
-#📌 Closing Thoughts
+# 📌 Closing Thoughts
 
 This project strengthened my ability to analyze real-world datasets using SQL and translate raw data into actionable insights. It reflects the kind of analytical thinking and technical skill expected in data analyst roles, particularly when working with large, structured datasets.
