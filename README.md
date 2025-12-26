@@ -58,7 +58,7 @@ WHERE country IS NOT NULL
 GROUP BY country
 ORDER BY total_titles DESC
 ```
-
+Results Returned
 
 <img width="1000" height="600" alt="Code_Generated_Image" src="https://github.com/user-attachments/assets/e585e5d0-44c9-42c9-8767-d5ba5556f875" />
 
@@ -86,7 +86,12 @@ WHERE rating IS NOT NULL
 GROUP BY type, rating
 ORDER BY type, rating_count DESC;
 ```
-<img width="1000" height="600" alt="Code_Generated_Image (1)" src="https://github.com/user-attachments/assets/ae03cd88-6993-4351-af97-a3121c3d540a" />
+Results Returned
+
+|TYPE        |RATING       |RATING_COUNT |
+|------------|-------------|-------------|
+| Movie      |  TV-MA      | 2062        |
+| TV-Show    |  TV-MA      | 1145        |
 
  **-** TV-MA is the most common rating for both Movies and TV Shows, indicating that Netflix heavily focuses on mature content.
 
@@ -108,6 +113,8 @@ GROUP BY directer
 ORDER BY total_titles DESC
 LIMIT 10;
 ```
+Results Returned
+
 <img width="1200" height="800" alt="Code_Generated_Image (2)" src="https://github.com/user-attachments/assets/061dd713-70d4-4083-a78e-945ad32b7dfa" />
 
 **-** Directors like Rajiv Chilaka and Raúl Campos & Jan Suter appear frequently, indicating repeat collaborations with Netflix.
@@ -130,6 +137,8 @@ SELECT
 FROM netfilex
 GROUP BY type;
 ```
+
+Results Returned
 
 | TYPE     | PERCENTAGE   |
 |----------|--------------|
@@ -158,6 +167,8 @@ GROUP BY release_year
 ORDER BY total_releases DESC
 LIMIT 1;
 ```
+
+Results Returned
 
 |RELEASE YEAR|TOTAL RELEASE|
 |------------|-------------|
@@ -194,7 +205,12 @@ SELECT
 FROM genre_count
 WHERE ranking = 1;
 ```
+Results Returned
 
+| TYPE     | GENRE                        | TOTAL TITLES|
+|----------|------------------------------|-------------|
+|Movie     |Dreamas,International Movies  |  362        |
+|TV Show   | Kid's TV                     |  220        |
 
 **-** Movies: The dominance of Dramas, International Movies shows Netflix’s strong focus on emotionally driven and globally diverse storytelling.
 
@@ -218,6 +234,11 @@ ORDER BY recent_additions DESC
 LIMIT 5;
 ```
 
+Results Returned
+
+<img width="1000" height="600" alt="Code_Generated_Image" src="https://github.com/user-attachments/assets/ad0b8d75-1b0f-436e-b8f3-5398d4566142" />
+
+
 **-** The United States continues to dominate Netflix’s content pipeline.
 
 **-** India and South Korea reflect Netflix’s expansion into high-growth international markets.
@@ -238,6 +259,10 @@ WHERE type = 'Movie'
 GROUP BY rating
 ORDER BY avg_minutes DESC;
 ```
+Results Returned
+
+<img width="1000" height="800" alt="Code_Generated_Image 5" src="https://github.com/user-attachments/assets/5db97c8f-5716-468e-aa17-7c91f5f54cb9" />
+
 
 **-** Higher-rated content (NC-17, TV-14) tends to be significantly longer, often due to complex narratives.
 
@@ -257,8 +282,13 @@ FROM netfilex
 WHERE type = 'Movie'
 ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
 LIMIT 1;
-
 ```
+Results Returned
+
+|TITLE           |
+|----------------|
+| Louis C.K. 2017| 
+
 **-** The result reveals data quality issues, where duration information is missing.
 
 **-** Business Insight: Incomplete metadata can affect analytics accuracy and user experience (e.g., filtering by length).
@@ -278,6 +308,16 @@ GROUP BY directer
 HAVING COUNT(DISTINCT type) = 2
 LIMIT 1O;
 ```
+Results Returned
+
+|DIRECTER          |
+|------------------|
+| Alessandro Angulo|
+| Billy Corben     |
+| Brand Anderson   |
+| David Ayer       | 
+| Eli Roth         |
+
 **-** These directors demonstrate cross-format versatility, contributing to both long-form series and standalone films.
 
 **-** Business Insight: Directors capable of working across formats offer Netflix flexibility in content strategy and production planning.
@@ -295,6 +335,12 @@ FROM netfilex
 GROUP BY release_year
 LIMIT 10;
 ```
+Results Returned
+
+<img width="1000" height="800" alt="Code_Generated_11" src="https://github.com/user-attachments/assets/4ae2e971-7998-4621-a2b4-985fb88e621b" />
+
+
+
 **-** 2018 stands out as Netflix’s most aggressive expansion year.
 
 **-** A steady increase from 2015–2019 reflects Netflix’s rapid global growth phase.
@@ -331,6 +377,12 @@ WHERE rn <= 3
 LIMIT 10;
 ```
 
+Results Returned
+
+<img width="1200" height="800" alt="Code_Generated_12" src="https://github.com/user-attachments/assets/0b68d04d-1f4d-4f3b-848d-b4b8423e46d9" />
+
+
+
 **-** TV-MA and TV-14 dominate globally, suggesting Netflix prioritizes mature and teen audiences.
 
 **-** Rating distribution varies by region, reflecting cultural and regulatory differences.
@@ -351,8 +403,27 @@ HAVING
     >
     COUNT(*) FILTER (WHERE type = 'Movie')
 LIMIT 10;
-
 ```
+
+Results Returned
+
+|Country                                                               |
+-----------------------------------------------------------------------|
+| Luxembourg                                                           |
+|Singapore                                                             |
+|India, Germany,France                                                 |
+|Colombia                                                              |
+|United State of America,Ireland,United kingdom,India                  |
+|Canada, United States of America, Ireland                             |
+|Italy, Canada, France                                                 |
+|Norway, Sweden                                                        |
+|Israel                                                                |
+|United Kingdom, Finland, Germany, United States of America, Australia |
+
+
+
+
+
 
 **-** These regions show a strong preference for episodic content.
 
@@ -374,6 +445,23 @@ FROM netfilex
 ORDER BY date_added DESC
 LIMIT 10;
 ```
+Results Returned
+
+|TITLE                                    | TYPE              |
+|-----------------------------------------|--------------------
+|Red and blue                             | TV Show           |
+|Gunslinger Girl                          | TV Show           |
+|Kikoriki                                 | TV Show           |
+|Maron                                    | TV Show           |
+|Frasier                                  | TV Show           |
+|Friends                                  | TV Show           |
+|A Young Doctor's Notebook                | TV Show           |
+|The Adventure of Figaro Pho              | TV Show           |
+|La familia P. Luche                      | TV Show           |
+|Anthony Bourdain                         | TV Show           |
+
+
+
 
 **-** Several recent entries lack date metadata, revealing data completeness issues.
 
@@ -396,6 +484,13 @@ WHERE type = 'TV Show'
 ORDER BY CAST(SPLIT_PART(duration, ' ', 1) AS INT) DESC
 LIMIT 10;
 ```
+Results Returned
+
+<img width="1200" height="800" alt="Code_Generated_15" src="https://github.com/user-attachments/assets/1b98ec7e-1577-4597-9835-2176170f016d" />
+
+
+
+
 **-** Long-running shows dominate binge-watching behavior.
 
 **-** These titles are high-retention assets, often driving long-term subscriptions.
